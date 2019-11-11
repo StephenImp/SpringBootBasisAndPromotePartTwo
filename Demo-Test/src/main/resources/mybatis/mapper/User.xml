@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.demotest.mapper.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.cn.demotest.entity.UserEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="age" property="age" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" javaType="com.cn.demotest.enums.UserSexEnum"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, age, sex
+    </sql>
+
+    <insert id="insert" parameterType="com.cn.demotest.entity.UserEntity" >
+        INSERT INTO
+        user
+        (name,age,sex)
+        VALUES
+        (#{name}, #{age}, #{sex})
+    </insert>
+
+    <delete id = "deleteByIds">
+        delete from user where id in
+        <foreach item="item" collection="ids" separator="," open="(" close=")" index="">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+
+    </delete>
+
+    <delete id = "deleteByIdsEquals">
+        <foreach item="item" collection="ids">
+            delete from user where id = #{item,jdbcType=VARCHAR};
+        </foreach>
+    </delete>
+</mapper>
