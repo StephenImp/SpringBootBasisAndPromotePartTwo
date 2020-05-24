@@ -17,10 +17,10 @@
 
     <!--服务发布的配置，需要暴露的服务接口-->
     <dubbo:service
-            interface="com.cn.IOrderServices"
+            interface="com.cn.demoApp.IOrderServices"
             ref="orderService"/>
 
     <!--Bean bean定义-->
-    <bean id="orderService" class="com.cn.OrderServiceImpl"/>
+    <bean id="orderService" class="com.cn.demoApp.OrderServiceImpl"/>
 
 </beans>

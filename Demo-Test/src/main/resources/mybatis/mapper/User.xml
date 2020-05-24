@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cn.demotest.mapper.UserMapper" >
-    <resultMap id="BaseResultMap" type="com.cn.demotest.entity.UserEntity" >
+<mapper namespace="com.cn.demoApp.demotest.mapper.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.cn.demoApp.demotest.entity.UserEntity" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="age" property="age" jdbcType="VARCHAR" />
-        <result column="sex" property="sex" javaType="com.cn.demotest.enums.UserSexEnum"/>
+        <result column="sex" property="sex" javaType="com.cn.demoApp.demotest.enums.UserSexEnum"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
         id, name, age, sex
     </sql>
 
-    <insert id="insert" parameterType="com.cn.demotest.entity.UserEntity" >
+    <insert id="insert" parameterType="com.cn.demoApp.demotest.entity.UserEntity" >
         INSERT INTO
         user
         (name,age,sex)

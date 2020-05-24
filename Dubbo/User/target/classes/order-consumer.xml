@@ -11,6 +11,6 @@
     <dubbo:registry address="zookeeper://192.168.11.129:2181?backup=192.168.11.137:2181,192.168.11.138:2181,192.168.11.139:2181"/>
 
     <!--生成一个远程服务的调用代理-->
-    <dubbo:reference id="orderServices" interface="com.cn.IOrderServices"/>
+    <dubbo:reference id="orderServices" interface="com.cn.demoApp.IOrderServices"/>
 
 </beans>
