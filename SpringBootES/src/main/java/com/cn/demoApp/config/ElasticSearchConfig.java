@@ -12,7 +12,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * Created by 瓦力.
+ *
  */
 @Configuration
 public class ElasticSearchConfig {

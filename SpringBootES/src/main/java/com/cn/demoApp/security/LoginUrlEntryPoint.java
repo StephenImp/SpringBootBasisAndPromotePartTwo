@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * 基于角色的登录入口控制器
- * Created by 瓦力.
+ *
  */
 public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
 

@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class DatatableSearch {
     /**

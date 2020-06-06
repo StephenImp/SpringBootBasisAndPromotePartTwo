@@ -23,7 +23,7 @@ import com.cn.demoApp.service.ServiceResult;
 import com.cn.demoApp.service.house.IHouseService;
 import com.cn.demoApp.web.dto.HouseSubscribeDTO;
 /**
- * Created by 瓦力.
+ *
  */
 @Controller
 public class UserController {

@@ -1,7 +1,7 @@
 package com.cn.demoApp.web.form;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class MapSearch {
     private String cityEnName;

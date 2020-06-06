@@ -1,7 +1,7 @@
 package com.cn.demoApp.service.search;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class HouseBucketDTO {
     /**

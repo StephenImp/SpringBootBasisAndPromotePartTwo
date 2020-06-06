@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class AuthFilter extends UsernamePasswordAuthenticationFilter {
 

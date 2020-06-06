@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class AddressServiceTests extends ApplicationTests {
     @Autowired

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 检索接口
- * Created by 瓦力.
+ *
  */
 public interface ISearchService {
     /**

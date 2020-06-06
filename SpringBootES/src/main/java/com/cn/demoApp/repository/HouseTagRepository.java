@@ -6,7 +6,7 @@ import com.cn.demoApp.entity.HouseTag;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Created by 瓦力.
+ *
  */
 public interface HouseTagRepository extends CrudRepository<HouseTag, Long> {
     HouseTag findByNameAndHouseId(String name, Long houseId);

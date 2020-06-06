@@ -16,7 +16,7 @@ import com.cn.demoApp.security.AuthProvider;
 import com.cn.demoApp.security.LoginUrlEntryPoint;
 
 /**
- * Created by 瓦力.
+ *
  */
 @EnableWebSecurity
 @EnableGlobalMethodSecurity

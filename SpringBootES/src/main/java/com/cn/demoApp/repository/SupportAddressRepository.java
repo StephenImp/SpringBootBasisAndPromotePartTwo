@@ -6,7 +6,7 @@ import com.cn.demoApp.entity.SupportAddress;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Created by 瓦力.
+ *
  */
 public interface SupportAddressRepository extends CrudRepository<SupportAddress, Long>{
     /**

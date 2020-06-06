@@ -1,9 +1,14 @@
 package com.cn.demoApp.service.user;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import com.cn.demoApp.base.LoginUserUtil;
+import com.cn.demoApp.entity.Role;
+import com.cn.demoApp.entity.User;
+import com.cn.demoApp.repository.RoleRepository;
+import com.cn.demoApp.repository.UserRepository;
+import com.cn.demoApp.service.IUserService;
+import com.cn.demoApp.service.ServiceResult;
+import com.cn.demoApp.web.dto.UserDTO;
+import com.google.common.collect.Lists;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
@@ -13,18 +18,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Lists;
-import com.cn.demoApp.base.LoginUserUtil;
-import com.cn.demoApp.entity.Role;
-import com.cn.demoApp.entity.User;
-import com.cn.demoApp.repository.RoleRepository;
-import com.cn.demoApp.repository.UserRepository;
-import com.cn.demoApp.service.IUserService;
-import com.cn.demoApp.service.ServiceResult;
-import com.cn.demoApp.web.dto.UserDTO;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
- * Created by 瓦力.
+ *
  */
 @Service
 public class UserServiceImpl implements IUserService {

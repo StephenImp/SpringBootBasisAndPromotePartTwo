@@ -3,7 +3,7 @@ package com.cn.demoApp.web.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class HousePictureDTO {
     private Long id;

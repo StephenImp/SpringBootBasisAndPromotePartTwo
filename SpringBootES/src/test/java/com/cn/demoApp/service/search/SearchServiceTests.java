@@ -10,19 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
- * Created by 瓦力.
+ *
  */
 public class SearchServiceTests extends ApplicationTests {
 
     @Autowired
     private ISearchService searchService;
 
+    /**
+     *  insert  or  update
+     */
     @Test
     public void testIndex() {
         Long targetHouseId = 15L;
         searchService.index(targetHouseId);
     }
 
+    /**
+     * delete
+     */
     @Test
     public void testRemove() {
         Long targetHouseId = 15L;

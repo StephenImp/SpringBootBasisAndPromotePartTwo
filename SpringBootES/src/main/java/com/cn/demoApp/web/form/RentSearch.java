@@ -2,7 +2,7 @@ package com.cn.demoApp.web.form;
 
 /**
  * 租房请求参数结构体
- * Created by 瓦力.
+ *
  */
 public class RentSearch {
     private String cityEnName;

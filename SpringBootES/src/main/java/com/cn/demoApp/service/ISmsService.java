@@ -2,7 +2,7 @@ package com.cn.demoApp.service;
 
 /**
  * 验证码服务
- * Created by 瓦力.
+ *
  */
 public interface ISmsService {
     /**

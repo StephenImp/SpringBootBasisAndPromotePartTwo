@@ -15,7 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 /**
- * Created by 瓦力.
+ *
  */
 @Configuration
 @EnableJpaRepositories(basePackages = "com.cn.repository")

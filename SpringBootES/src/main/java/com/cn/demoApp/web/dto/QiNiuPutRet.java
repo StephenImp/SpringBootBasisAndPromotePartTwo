@@ -1,7 +1,7 @@
 package com.cn.demoApp.web.dto;
 
 /**
- * Created by 瓦力.
+ *
  */
 public final class QiNiuPutRet {
     public String key;

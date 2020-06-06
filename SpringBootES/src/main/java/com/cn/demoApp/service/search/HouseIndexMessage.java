@@ -1,7 +1,6 @@
 package com.cn.demoApp.service.search;
 
 /**
- * Created by 瓦力.
  */
 public class HouseIndexMessage {
 
@@ -12,7 +11,7 @@ public class HouseIndexMessage {
 
     private Long houseId;
     private String operation;
-    private int retry = 0;
+    private int retry = 0; //消息可以重复消费，异常情况下，没有构建成功的话，可以再次构建
 
     /**
      * 默认构造器 防止jackson序列化失败

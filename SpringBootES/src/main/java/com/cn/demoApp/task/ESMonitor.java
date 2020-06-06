@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Created by 瓦力.
+ *
  */
 @Component
 public class ESMonitor {

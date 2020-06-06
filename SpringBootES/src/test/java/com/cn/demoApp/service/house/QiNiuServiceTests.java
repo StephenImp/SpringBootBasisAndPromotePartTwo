@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.File;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class QiNiuServiceTests extends ApplicationTests {
     @Autowired

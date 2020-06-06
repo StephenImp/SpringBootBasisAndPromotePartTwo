@@ -9,7 +9,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 
 /**
  * session会话
- * Created by 瓦力.
+ *
  */
 @Configuration
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400)

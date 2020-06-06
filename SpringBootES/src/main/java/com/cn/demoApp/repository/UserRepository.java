@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.cn.demoApp.entity.User;
 
 /**
- * Created by 瓦力.
+ *
  */
 public interface UserRepository extends CrudRepository<User, Long> {
 

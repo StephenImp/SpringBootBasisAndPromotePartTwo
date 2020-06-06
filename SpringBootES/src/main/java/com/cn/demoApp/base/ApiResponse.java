@@ -2,7 +2,7 @@ package com.cn.demoApp.base;
 
 /**
  * API格式封装
- * Created by 瓦力.
+ *
  */
 public class ApiResponse {
     private int code;

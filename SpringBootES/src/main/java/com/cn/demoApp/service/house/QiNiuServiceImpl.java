@@ -16,7 +16,7 @@ import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 
 /**
- * Created by 瓦力.
+ *
  */
 @Service
 public class QiNiuServiceImpl implements IQiNiuService, InitializingBean {

@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by 瓦力.
  */
 @Service
 public class SearchServiceImpl implements ISearchService {
@@ -100,6 +99,10 @@ public class SearchServiceImpl implements ISearchService {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    /**
+     * 监听 topic
+     * @param content  消息结构体
+     */
     @KafkaListener(topics = INDEX_TOPIC)
     private void handleMessage(String content) {
         try {
@@ -121,6 +124,10 @@ public class SearchServiceImpl implements ISearchService {
         }
     }
 
+    /**
+     *  ES   CRUD
+     * @param message
+     */
     private void createOrUpdateIndex(HouseIndexMessage message) {
         Long houseId = message.getHouseId();
 
@@ -204,6 +211,9 @@ public class SearchServiceImpl implements ISearchService {
 
         ServiceResult serviceResult = addressService.removeLbs(houseId);
 
+        /**
+         * 消息消费失败，则重新消费
+         */
         if (!serviceResult.isSuccess() || deleted <= 0) {
             logger.warn("Did not remove data from es for response: " + response);
             // 重新加入消息队列
@@ -218,6 +228,8 @@ public class SearchServiceImpl implements ISearchService {
     }
 
     private void index(Long houseId, int retry) {
+
+        //防止死循环   在消费消息的时候，查询house信息异常，重新将消息构建放入kafka队列中。
         if (retry > HouseIndexMessage.MAX_RETRY) {
             logger.error("Retry index times over 3 for house: " + houseId + " Please check it!");
             return;
@@ -232,6 +244,11 @@ public class SearchServiceImpl implements ISearchService {
 
     }
 
+    /**
+     * ES 插入数据
+     * @param indexTemplate
+     * @return
+     */
     private boolean create(HouseIndexTemplate indexTemplate) {
         if (!updateSuggest(indexTemplate)) {
             return false;
@@ -240,7 +257,6 @@ public class SearchServiceImpl implements ISearchService {
         try {
             IndexResponse response = this.esClient.prepareIndex(INDEX_NAME, INDEX_TYPE)
                     .setSource(objectMapper.writeValueAsBytes(indexTemplate), XContentType.JSON).get();
-
             logger.debug("Create index with house: " + indexTemplate.getHouseId());
             if (response.status() == RestStatus.CREATED) {
                 return true;
@@ -253,6 +269,12 @@ public class SearchServiceImpl implements ISearchService {
         }
     }
 
+    /**
+     * ES 更新数据
+     * @param esId
+     * @param indexTemplate
+     * @return
+     */
     private boolean update(String esId, HouseIndexTemplate indexTemplate) {
         if (!updateSuggest(indexTemplate)) {
             return false;
@@ -260,7 +282,6 @@ public class SearchServiceImpl implements ISearchService {
 
         try {
             UpdateResponse response = this.esClient.prepareUpdate(INDEX_NAME, INDEX_TYPE, esId).setDoc(objectMapper.writeValueAsBytes(indexTemplate), XContentType.JSON).get();
-
             logger.debug("Update index with house: " + indexTemplate.getHouseId());
             if (response.status() == RestStatus.OK) {
                 return true;
@@ -273,6 +294,12 @@ public class SearchServiceImpl implements ISearchService {
         }
     }
 
+    /**
+     * 删除并且创建
+     * @param totalHit
+     * @param indexTemplate
+     * @return
+     */
     private boolean deleteAndCreate(long totalHit, HouseIndexTemplate indexTemplate) {
         DeleteByQueryRequestBuilder builder = DeleteByQueryAction.INSTANCE
                 .newRequestBuilder(esClient)
@@ -283,6 +310,7 @@ public class SearchServiceImpl implements ISearchService {
 
         BulkByScrollResponse response = builder.get();
         long deleted = response.getDeleted();
+        //查询与删除数量不一致
         if (deleted != totalHit) {
             logger.warn("Need delete {}, but {} was deleted!", totalHit, deleted);
             return false;

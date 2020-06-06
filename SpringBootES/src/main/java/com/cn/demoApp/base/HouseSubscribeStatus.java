@@ -2,7 +2,7 @@ package com.cn.demoApp.base;
 
 /**
  * 预约状态码
- * Created by 瓦力.
+ *
  */
 public enum HouseSubscribeStatus {
     NO_SUBSCRIBE(0), // 未预约

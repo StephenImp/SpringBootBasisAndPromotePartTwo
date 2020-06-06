@@ -1,7 +1,7 @@
 package com.cn.demoApp.web.dto;
 
 /**
- * Created by 瓦力.
+ *
  */
 public class SubwayDTO {
     private Long id;
