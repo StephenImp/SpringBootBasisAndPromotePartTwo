@@ -250,6 +250,7 @@ public class SearchServiceImpl implements ISearchService {
      * @return
      */
     private boolean create(HouseIndexTemplate indexTemplate) {
+        //对  Suggest 进行填充操作
         if (!updateSuggest(indexTemplate)) {
             return false;
         }
@@ -276,6 +277,7 @@ public class SearchServiceImpl implements ISearchService {
      * @return
      */
     private boolean update(String esId, HouseIndexTemplate indexTemplate) {
+        //对  Suggest 进行填充操作
         if (!updateSuggest(indexTemplate)) {
             return false;
         }
@@ -324,10 +326,18 @@ public class SearchServiceImpl implements ISearchService {
         this.remove(houseId, 0);
     }
 
+    /**
+     * 查询接口
+     * @param rentSearch
+     * @return
+     */
     @Override
     public ServiceMultiResult<Long> query(RentSearch rentSearch) {
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
+        /**
+         * 构造条件搜索
+         */
         boolQuery.filter(
                 QueryBuilders.termQuery(HouseIndexKey.CITY_EN_NAME, rentSearch.getCityEnName())
         );
@@ -374,11 +384,16 @@ public class SearchServiceImpl implements ISearchService {
             );
         }
 
+        //优化方式:改变重要字段的权重
 //        boolQuery.must(
 //                QueryBuilders.matchQuery(HouseIndexKey.TITLE, rentSearch.getKeywords())
 //                        .boost(2.0f)
 //        );
 
+        /**
+         *
+         * 关键词搜索
+         */
         boolQuery.must(
                 QueryBuilders.multiMatchQuery(rentSearch.getKeywords(),
                         HouseIndexKey.TITLE,
@@ -389,6 +404,9 @@ public class SearchServiceImpl implements ISearchService {
                         HouseIndexKey.SUBWAY_STATION_NAME
                 ));
 
+        /**
+         * 条件搜索和范围搜索 组合
+         */
         SearchRequestBuilder requestBuilder = this.esClient.prepareSearch(INDEX_NAME)
                 .setTypes(INDEX_TYPE)
                 .setQuery(boolQuery)
@@ -417,6 +435,11 @@ public class SearchServiceImpl implements ISearchService {
         return new ServiceMultiResult<>(response.getHits().totalHits, houseIds);
     }
 
+    /**
+     * Search-as-you-type
+     * @param prefix
+     * @return
+     */
     @Override
     public ServiceResult<List<String>> suggest(String prefix) {
         CompletionSuggestionBuilder suggestion = SuggestBuilders.completionSuggestion("suggest").prefix(prefix).size(5);
@@ -586,6 +609,11 @@ public class SearchServiceImpl implements ISearchService {
         return new ServiceMultiResult<>(response.getHits().getTotalHits(), houseIds);
     }
 
+    /**
+     *  对  Suggest 进行填充操作
+     * @param indexTemplate
+     * @return
+     */
     private boolean updateSuggest(HouseIndexTemplate indexTemplate) {
         AnalyzeRequestBuilder requestBuilder = new AnalyzeRequestBuilder(
                 this.esClient, AnalyzeAction.INSTANCE, INDEX_NAME, indexTemplate.getTitle(),

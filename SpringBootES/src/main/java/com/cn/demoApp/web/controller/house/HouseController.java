@@ -52,6 +52,7 @@ public class HouseController {
         if (prefix.isEmpty()) {
             return ApiResponse.ofStatus(ApiResponse.Status.BAD_REQUEST);
         }
+        //Search-as-you-type
         ServiceResult<List<String>> result = this.searchService.suggest(prefix);
         return ApiResponse.ofSuccess(result.getResult());
     }
