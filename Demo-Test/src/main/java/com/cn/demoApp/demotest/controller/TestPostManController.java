@@ -2,6 +2,7 @@ package com.cn.demoApp.demotest.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.regex.Pattern;
 public class TestPostManController {
 
     @RequestMapping("/postMan")
+    @ResponseBody
     private void testPostMan(){
 
         List<String> list = new ArrayList<>();
