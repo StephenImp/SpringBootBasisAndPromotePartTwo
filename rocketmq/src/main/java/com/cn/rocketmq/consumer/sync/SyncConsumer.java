@@ -1,5 +1,6 @@
 package com.cn.rocketmq.consumer.sync;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -26,13 +27,14 @@ public class SyncConsumer {
         consumer.setNamesrvAddr("localhost:9876");
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
-        consumer.subscribe("syncTopic", "*");
+        consumer.subscribe("syncTopic", "syncTag");
         // 注册回调实现类来处理从broker拉取回来的消息
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
 
                 for (MessageExt msg : msgs) {
+                    System.out.println("msg :"+ msg.getBody());
                     System.out.printf("%s Receive New sync Messages: %s %n", Thread.currentThread().getName(), new String(msg.getBody()));
                 }
                 // 标记该消息已经被成功消费

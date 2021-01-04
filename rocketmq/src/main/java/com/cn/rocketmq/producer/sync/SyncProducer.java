@@ -19,6 +19,10 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  *      1.生产者组是生产者组，消费者组是消费者组，两个组的名称可以不相同，但是是可以消费的。
  *      2.tag是怎么用的？ tag 的说明详见 OrderProducer -- readme.txt
  *      3.keys是怎么使用的？
+ *          keys：Message索引键，多个用空格隔开，
+ *          RocketMQ可以根据这些key快速检索到消息对消息关键字的提取方便查询，
+ *          比如一条消息某个关键字是 运单号，之后我们可以使用这个运单号作为关键字进行查询
+ *
  *
  */
 public class SyncProducer {
@@ -32,7 +36,7 @@ public class SyncProducer {
         producer.start();
         for (int i = 0; i < 5; i++) {
         // 创建消息，并指定Topic，Tag和消息体
-        Message msg = new Message("syncTopic", "syncTag",
+        Message msg = new Message("syncTopic", "syncTag","asyncProducerKey"+i,
                 ("Hello RocketMQ ,This is sync msg"+i).getBytes(RemotingHelper.DEFAULT_CHARSET)
         );
         // 发送消息到一个Broker

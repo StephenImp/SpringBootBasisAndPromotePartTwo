@@ -27,6 +27,8 @@ public class BatchConsumer {
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         consumer.subscribe("BatchTest", "*");
+        consumer.setConsumeMessageBatchMaxSize(2);//设置批量消费条数
+
         // 注册回调实现类来处理从broker拉取回来的消息
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
