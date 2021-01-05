@@ -1,5 +1,0 @@
-http:
-  log-request-details: true
-
-#server:
-#  port: 8080

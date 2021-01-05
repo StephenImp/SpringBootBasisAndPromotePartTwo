@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ *  Mono 0-1个元素
+ *  Flux 0-N个元素
+ */
 @RestController
 public class UserController {
 

@@ -4,6 +4,7 @@ package com.cn.webflux.webfluxdemo1.service.impl;
 import com.cn.webflux.webfluxdemo1.entity.User;
 import com.cn.webflux.webfluxdemo1.service.UserService;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,7 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
+@Service("UserServiceImpl1")
 public class UserServiceImpl implements UserService {
 
     //创建map集合存储数据
