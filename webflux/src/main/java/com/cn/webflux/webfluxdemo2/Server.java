@@ -6,6 +6,7 @@ import com.cn.webflux.webfluxdemo2.service.UserService;
 import com.cn.webflux.webfluxdemo2.service.impl.UserServiceImpl;
 import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -23,9 +24,21 @@ public class Server {
         server.createReactorServer();
         System.out.println("enter to exit");
         System.in.read();
+
     }
 
-    //1 创建Router路由
+    //1 创建服务器完成适配
+    public void createReactorServer() {
+        //路由和handler适配
+        RouterFunction<ServerResponse> route = routingFunction();
+        HttpHandler httpHandler = toHttpHandler(route);
+        ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(httpHandler);
+        //创建服务器
+        HttpServer httpServer = HttpServer.create();
+        httpServer.handle(adapter).bindNow();
+    }
+
+    //2 创建Router路由
     public RouterFunction<ServerResponse> routingFunction() {
         //创建hanler对象
         UserService userService = new UserServiceImpl();
@@ -36,14 +49,5 @@ public class Server {
                 .andRoute(GET("/users").and(accept(APPLICATION_JSON)),handler::getAllUsers);
     }
 
-    //2 创建服务器完成适配
-    public void createReactorServer() {
-        //路由和handler适配
-        RouterFunction<ServerResponse> route = routingFunction();
-        HttpHandler httpHandler = toHttpHandler(route);
-        ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(httpHandler);
-        //创建服务器
-        HttpServer httpServer = HttpServer.create();
-        httpServer.handle(adapter).bindNow();
-    }
+
 }
