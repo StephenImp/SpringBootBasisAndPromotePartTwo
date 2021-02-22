@@ -11,6 +11,9 @@ public class UserEntity {
     private String age;
     private UserSexEnum sex;
 
+    public UserEntity() {
+    }
+
     public UserEntity(String name, String age, UserSexEnum sexEnum) {
         this.name = name;
         this.age = age;
