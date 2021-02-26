@@ -1,11 +1,13 @@
 package com.cn.demoApp.demotest.dispatcher;
 
+import com.cn.demoApp.demotest.entity.UserEntity;
+
 /**
  * @author Steph
  */
-public interface IDispatchHandler<I,E> {
+public interface IDispatchHandler<A,E> {
 
 
-    void test(I UserEntity,E DepartmentEntity);
+    void test(A UserEntity, E DepartmentEntity);
 
 }
